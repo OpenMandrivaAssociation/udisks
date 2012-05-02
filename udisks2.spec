@@ -5,14 +5,13 @@
 
 Summary: Disk Manager
 Name: udisks2
-Version: 1.93.0
+Version: 1.96.0
 Release: %mkrel 1
 License: GPLv2+
 Group: System/Libraries
 URL: http://www.freedesktop.org/wiki/Software/udisks
 Source0: http://udisks.freedesktop.org/releases/udisks-%{version}.tar.bz2
 Patch0: udisks-1.92.0-link.patch
-Patch0100: 0100-Pass-readonly-to-cryptsetup-8-if-device-to-unlock-is.patch
 BuildRequires: pkgconfig(gio-unix-2.0) >= 2.31.13
 BuildRequires: pkgconfig(gmodule-2.0)
 BuildRequires: pkgconfig(glib-2.0) >= 2.31.13
@@ -88,7 +87,7 @@ daemon. This package is for the udisks 2.x series.
 
 %prep
 %setup -q -n udisks-%{version}
-%apply_patches
+%patch0 -p1
 
 %build
 NOCONFIGURE=yes gnome-autogen.sh
