@@ -98,6 +98,8 @@ NOCONFIGURE=yes gnome-autogen.sh
 %makeinstall_std
 rm -f %{buildroot}%{_libdir}/*.la
 
+mkdir -p %{buildroot}/%{_localstatedir}/lib/udisks2
+
 %find_lang %name
 
 %files -f %name.lang
@@ -138,4 +140,3 @@ rm -f %{buildroot}%{_libdir}/*.la
 %dir %{_datadir}/gtk-doc/html/udisks2
 %{_datadir}/gtk-doc/html/udisks2/*
 %{_libdir}/pkgconfig/udisks2.pc
-
