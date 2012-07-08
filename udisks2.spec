@@ -3,50 +3,50 @@
 %define girname %mklibname udisks-gir 2.0
 %define develname %mklibname -d %name
 
-Summary: Disk Manager
-Name: udisks2
-Version: 1.98.0
-Release: 1
-License: GPLv2+
-Group: System/Libraries
-URL: http://www.freedesktop.org/wiki/Software/udisks
-Source0: http://udisks.freedesktop.org/releases/udisks-%{version}.tar.bz2
-Patch0: udisks-1.92.0-link.patch
-BuildRequires: pkgconfig(gio-unix-2.0) >= 2.31.13
-BuildRequires: pkgconfig(gmodule-2.0)
-BuildRequires: pkgconfig(glib-2.0) >= 2.31.13
-BuildRequires: pkgconfig(gudev-1.0) >= 147
-BuildRequires: pkgconfig(libatasmart) >= 0.17
-BuildRequires: pkgconfig(polkit-gobject-1) >= 0.92
-BuildRequires: pkgconfig(polkit-agent-1) >= 0.92
-BuildRequires: intltool
-BuildRequires: gobject-introspection-devel
-BuildRequires: gnome-common
-BuildRequires: gettext-devel
-BuildRequires: gtk-doc >= 1.3
+Summary:	Disk Manager
+Name:		udisks2
+Version:	1.98.0
+Release:	2
+License:	GPLv2+
+Group:		System/Libraries
+URL:		http://www.freedesktop.org/wiki/Software/udisks
+Source0:	http://udisks.freedesktop.org/releases/udisks-%{version}.tar.bz2
+Patch0:		udisks-1.92.0-link.patch
+BuildRequires:	pkgconfig(gio-unix-2.0) >= 2.31.13
+BuildRequires:	pkgconfig(gmodule-2.0)
+BuildRequires:	pkgconfig(glib-2.0) >= 2.31.13
+BuildRequires:	pkgconfig(gudev-1.0) >= 186
+BuildRequires:	pkgconfig(libatasmart) >= 0.19
+BuildRequires:	pkgconfig(polkit-gobject-1) >= 0.92
+BuildRequires:	pkgconfig(polkit-agent-1) >= 0.92
+BuildRequires:	intltool
+BuildRequires:	gobject-introspection-devel
+BuildRequires:	gnome-common
+BuildRequires:	gettext-devel
+BuildRequires:	gtk-doc >= 1.3
 # needed to pull in the system bus daemon
-Requires: dbus >= 1.4.0
+Requires:	dbus >= 1.4.0
 # needed to pull in the udev daemon
-Requires: udev >= 173
+Requires:	udev >= 186
 # for mount, umount, mkswap
-Requires: util-linux
+Requires:	util-linux
 # for mkfs.ext3, mkfs.ext3, e2label
-Requires: e2fsprogs
+Requires:	e2fsprogs
 # for mkfs.xfs, xfs_admin
-Requires: xfsprogs
+Requires:	xfsprogs
 # for mkfs.vfat
-Requires: dosfstools
+Requires:	dosfstools
 # for mlabel
-Requires: mtools
-Requires: ntfsprogs
+Requires:	mtools
+Requires:	ntfsprogs
 # for partitioning
-Requires: parted
-Requires: gdisk
+Requires:	parted
+Requires:	gdisk
 # for LUKS devices
-Requires: cryptsetup-luks
+Requires:	cryptsetup-luks
 
 # for /proc/self/mountinfo, only available in 2.6.26 or higher
-Conflicts: kernel < 2.6.26
+Conflicts:	kernel < 2.6.26
 
 %description
 udisks provides a daemon, D-Bus API and command line tools for
@@ -54,10 +54,10 @@ managing disks and storage devices. This package is for the udisks 2.x
 series.
 
 %package -n %{libname}
-Summary: Dynamic library to access the udisks daemon
-Group: System/Libraries
-Obsoletes: %{_lib}udisks20 < 1.90.0-2
-License: LGPLv2+
+Summary:	Dynamic library to access the udisks daemon
+Group:		System/Libraries
+Obsoletes:	%{_lib}udisks20 < 1.90.0-2
+License:	LGPLv2+
 
 %description -n %{libname}
 This package contains the dynamic library libudisks2, which provides
@@ -65,20 +65,20 @@ access to the udisks daemon. This package is for the udisks 2.x
 series.
 
 %package -n %{girname}
-Summary: GObject Introspection interface description for %name
-Group: System/Libraries
-License: LGPLv2+
-Requires: %{libname} = %{version}
+Summary:	GObject Introspection interface description for %name
+Group:		System/Libraries
+License:	LGPLv2+
+Requires:	%{libname} = %{version}-%{release}
 
 %description -n %{girname}
 GObject Introspection interface description for %{name}.
 
 %package -n %{develname}
-Summary: Development files for libudev
-Group: System/Libraries
-License: LGPLv2+
-Requires: %{libname} = %{version}-%{release}
-Provides: %{name}-devel = %{version}-%{release}
+Summary:	Development files for libudev
+Group:		System/Libraries
+License:	LGPLv2+
+Requires:	%{libname} = %{version}-%{release}
+Provides:	%{name}-devel = %{version}-%{release}
 
 %description -n %{develname}
 This package contains the development files for the library
@@ -100,7 +100,7 @@ rm -f %{buildroot}%{_libdir}/*.la
 
 mkdir -p %{buildroot}/%{_localstatedir}/lib/udisks2
 
-%find_lang %name
+%find_lang %{name} %{name}.lang
 
 %files -f %name.lang
 %doc README AUTHORS NEWS COPYING HACKING
