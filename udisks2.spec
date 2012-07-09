@@ -6,7 +6,7 @@
 Summary:	Disk Manager
 Name:		udisks2
 Version:	1.98.0
-Release:	2
+Release:	3
 License:	GPLv2+
 Group:		System/Libraries
 URL:		http://www.freedesktop.org/wiki/Software/udisks
@@ -19,6 +19,7 @@ BuildRequires:	pkgconfig(gudev-1.0) >= 186
 BuildRequires:	pkgconfig(libatasmart) >= 0.19
 BuildRequires:	pkgconfig(polkit-gobject-1) >= 0.92
 BuildRequires:	pkgconfig(polkit-agent-1) >= 0.92
+BuildRequires:	pkgconfig(libsystemd-login) >= 186
 BuildRequires:	intltool
 BuildRequires:	gobject-introspection-devel
 BuildRequires:	gnome-common
