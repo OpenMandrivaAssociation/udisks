@@ -5,7 +5,7 @@
 
 Summary:	Disk Manager
 Name:		udisks2
-Version:	1.99.0
+Version:	2.0.0
 Release:	1
 License:	GPLv2+
 Group:		System/Libraries
@@ -106,7 +106,8 @@ mkdir -p %{buildroot}/%{_localstatedir}/lib/udisks2
 %files -f %name.lang
 %doc README AUTHORS NEWS COPYING HACKING
 %{_sysconfdir}/dbus-1/system.d/org.freedesktop.UDisks2.conf
-%{_sysconfdir}/bash_completion.d/udisksctl-bash-completion.sh
+#%{_sysconfdir}/bash_completion.d/udisksctl-bash-completion.sh
+%{_datadir}/bash-completion/completions/udisksctl
 /lib/udev/rules.d/80-udisks2.rules
 %{_sbindir}/umount.udisks2
 
