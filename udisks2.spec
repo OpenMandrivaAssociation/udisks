@@ -12,6 +12,7 @@ Group:		System/Libraries
 URL:		http://www.freedesktop.org/wiki/Software/udisks
 Source0:	http://udisks.freedesktop.org/releases/udisks-%{version}.tar.bz2
 Patch0:		udisks-1.92.0-link.patch
+Patch1:		mount_in_media.patch
 BuildRequires:	pkgconfig(gio-unix-2.0) >= 2.31.13
 BuildRequires:	pkgconfig(gmodule-2.0)
 BuildRequires:	pkgconfig(glib-2.0) >= 2.31.13
@@ -89,6 +90,7 @@ daemon. This package is for the udisks 2.x series.
 %prep
 %setup -q -n udisks-%{version}
 %patch0 -p1
+%patch1 -p1
 
 %build
 NOCONFIGURE=yes gnome-autogen.sh
