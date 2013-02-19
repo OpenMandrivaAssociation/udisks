@@ -5,7 +5,7 @@
 
 Summary:	Disk Manager
 Name:		udisks2
-Version:	2.0.91
+Version:	2.0.92
 Release:	1
 License:	GPLv2+
 Group:		System/Libraries

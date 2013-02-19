@@ -1,4 +1,5 @@
+---
 removed_sources:
   udisks-2.0.1.tar.bz2: ec8a7df75f162116a53ed108723769727a7e481f
 sources:
-  udisks-2.0.91.tar.bz2: fa1107e176178ed31112d211cd7ad93877016c10
+  udisks-2.0.92.tar.bz2: 5e616648dcae2e5403931b787bdaa1b2d8d4e9f9
