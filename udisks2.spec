@@ -13,7 +13,7 @@ URL:		http://www.freedesktop.org/wiki/Software/udisks
 Source0:	http://udisks.freedesktop.org/releases/udisks-%{version}.tar.bz2
 Source1:	udisks2.rpmlintrc
 Patch0:		udisks-1.92.0-link.patch
-Patch1:		mount_in_media.patch
+Patch1:		udisks-2.0.92-mount_in_media.patch
 BuildRequires:	pkgconfig(gio-unix-2.0) >= 2.31.13
 BuildRequires:	pkgconfig(gmodule-2.0)
 BuildRequires:	pkgconfig(glib-2.0) >= 2.31.13
