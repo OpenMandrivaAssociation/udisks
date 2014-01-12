@@ -6,7 +6,7 @@
 Summary:	Disk Manager
 Name:		udisks2
 Version:	2.1.0
-Release:	5
+Release:	6
 License:	GPLv2+
 Group:		System/Libraries
 URL:		http://www.freedesktop.org/wiki/Software/udisks
