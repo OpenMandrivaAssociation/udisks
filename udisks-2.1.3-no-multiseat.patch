@@ -1,0 +1,52 @@
+diff -urN udisks-2.1.3/src/udiskslinuxfilesystem.c udisks-2.1.3-patched/src/udiskslinuxfilesystem.c
+--- udisks-2.1.3/src/udiskslinuxfilesystem.c	2014-03-06 03:05:43.000000000 +1100
++++ udisks-2.1.3-patched/src/udiskslinuxfilesystem.c	2014-03-20 03:02:25.071858852 +1100
+@@ -893,45 +893,10 @@
+   /* If we know the user-name and it doesn't have any '/' character in
+    * it, mount in /run/media/$USER
+    */
+-  if (!fs_shared && (user_name != NULL && strstr (user_name, "/") == NULL))
+-    {
+-      mount_dir = g_strdup_printf ("/run/media/%s", user_name);
+-      if (!g_file_test (mount_dir, G_FILE_TEST_EXISTS))
+-        {
+-          /* First ensure that /run/media exists */
+-          if (!g_file_test ("/run/media", G_FILE_TEST_EXISTS))
+-            {
+-              if (g_mkdir ("/run/media", 0755) != 0)
+-                {
+-                  g_set_error (error,
+-                               UDISKS_ERROR,
+-                               UDISKS_ERROR_FAILED,
+-                               "Error creating directory /run/media: %m");
+-                  goto out;
+-                }
+-            }
+-          /* Then create the per-user /run/media/$USER */
+-          if (g_mkdir (mount_dir, 0700) != 0)
+-            {
+-              g_set_error (error,
+-                           UDISKS_ERROR,
+-                           UDISKS_ERROR_FAILED,
+-                           "Error creating directory `%s': %m",
+-                           mount_dir);
+-              goto out;
+-            }
+-          /* Finally, add the read+execute ACL for $USER */
+-          if (!add_acl (mount_dir, uid, error))
+-            {
+-              if (rmdir (mount_dir) != 0)
+-                udisks_warning ("Error calling rmdir() on %s: %m", mount_dir);
+-              goto out;
+-            }
+-        }
+-    }
++  // Remove code
+   /* otherwise fall back to mounting in /media */
+-  if (mount_dir == NULL)
+-    mount_dir = g_strdup ("/media");
++  // if (mount_dir == NULL)
++  mount_dir = g_strdup ("/media");
+ 
+   /* NOTE: UTF-8 has the nice property that valid UTF-8 strings only contains
+    *       the byte 0x2F if it's for the '/' character (U+002F SOLIDUS).
