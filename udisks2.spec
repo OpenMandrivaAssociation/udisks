@@ -8,7 +8,7 @@
 Summary:	Disk Manager
 Name:		udisks2
 Version:	2.1.3
-Release:	2
+Release:	3
 License:	GPLv2+
 Group:		System/Libraries
 Url:		http://www.freedesktop.org/wiki/Software/udisks
@@ -19,6 +19,9 @@ Patch1:		udisks-2.1.0-mount-system-internal.patch
 Patch2:		udisks-2.0.92-mount_in_media.patch
 # Mount to /media
 Patch3:		udisks-2.1.3-no-multiseat.patch
+# From Debian/Ubuntu
+# As /media is not currently a tmpfs, we need to put the "mounted-fs" file to a persistent path
+Patch4:		udisks-2.1.3-mounted-fs.patch
 BuildRequires:	pkgconfig(gio-unix-2.0) >= 2.31.13
 BuildRequires:	pkgconfig(gmodule-2.0)
 BuildRequires:	pkgconfig(glib-2.0) >= 2.31.13
@@ -144,6 +147,7 @@ daemon. This package is for the udisks 2.x series.
 %else
 %patch3 -p1
 %endif
+%patch4 -p1
 
 %build
 NOCONFIGURE=yes gnome-autogen.sh
