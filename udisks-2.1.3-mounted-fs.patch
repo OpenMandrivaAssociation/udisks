@@ -1,0 +1,27 @@
+diff -urN udisks-2.1.3/src/udisksstate.c udisks-2.1.3-patched/src/udisksstate.c
+--- udisks-2.1.3/src/udisksstate.c	2014-03-06 03:05:43.000000000 +1100
++++ udisks-2.1.3-patched/src/udisksstate.c	2014-03-26 20:04:21.181604990 +1100
+@@ -2235,7 +2235,10 @@
+    * - could also mmap the file
+    */
+ 
+-  path = g_strdup_printf ("/run/udisks2/%s", key);
++  if (strcmp (key, "mounted-fs") == 0)
++    path = g_strdup_printf ("/var/lib/udisks2/%s", key);
++  else
++    path = g_strdup_printf ("/run/udisks2/%s", key);
+ 
+   /* see if it's already in the cache */
+   ret = g_hash_table_lookup (state->cache, path);
+@@ -2301,7 +2304,10 @@
+   data = g_malloc (size);
+   g_variant_store (normalized, data);
+ 
+-  path = g_strdup_printf ("/run/udisks2/%s", key);
++  if (strcmp (key, "mounted-fs") == 0)
++    path = g_strdup_printf ("/var/lib/udisks2/%s", key);
++  else
++    path = g_strdup_printf ("/run/udisks2/%s", key);
+ 
+   g_hash_table_insert (state->cache, g_strdup (path), g_variant_ref (value));
+ 

@@ -1,0 +1,11 @@
+--- a/data/org.freedesktop.udisks2.policy.in	2013-01-07 03:45:52.000000000 +0400
++++ b/data/org.freedesktop.udisks2.policy.in	2013-06-20 14:15:07.543433797 +0400
+@@ -29,7 +29,7 @@
+     <defaults>
+       <allow_any>auth_admin</allow_any>
+       <allow_inactive>auth_admin</allow_inactive>
+-      <allow_active>auth_admin_keep</allow_active>
++      <allow_active>yes</allow_active>
+     </defaults>
+   </action>
+ 
