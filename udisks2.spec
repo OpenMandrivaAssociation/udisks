@@ -8,7 +8,7 @@
 Summary:	Disk Manager
 Name:		udisks2
 Version:	2.1.3
-Release:	6
+Release:	7
 License:	GPLv2+
 Group:		System/Libraries
 Url:		http://www.freedesktop.org/wiki/Software/udisks
@@ -38,7 +38,7 @@ BuildRequires:	gtk-doc >= 1.3
 # for LUKS devices
 Requires:	cryptsetup-luks
 # needed to pull in the system bus daemon
-Requires:	dbus >= 1.4.0
+Requires:	dbus >= 1:1.8.0
 # for mkfs.vfat
 Requires:	dosfstools
 # for mkfs.ext3, mkfs.ext3, e2label
@@ -151,7 +151,7 @@ daemon. This package is for the udisks 2.x series.
 
 %build
 NOCONFIGURE=yes gnome-autogen.sh
-%configure2_5x \
+%configure \
 	--enable-gtk-doc \
 	--disable-static \
 	--with-systemdsystemunitdir=%{_unitdir}
