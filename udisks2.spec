@@ -8,7 +8,7 @@
 Summary:	Disk Manager
 Name:		udisks2
 Version:	2.1.3
-Release:	7
+Release:	8
 License:	GPLv2+
 Group:		System/Libraries
 Url:		http://www.freedesktop.org/wiki/Software/udisks
@@ -38,7 +38,7 @@ BuildRequires:	gtk-doc >= 1.3
 # for LUKS devices
 Requires:	cryptsetup-luks
 # needed to pull in the system bus daemon
-Requires:	dbus >= 1:1.8.0
+Requires:	dbus >= -1:1.8.0
 # for mkfs.vfat
 Requires:	dosfstools
 # for mkfs.ext3, mkfs.ext3, e2label
