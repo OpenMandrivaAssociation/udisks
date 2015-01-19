@@ -38,7 +38,7 @@ BuildRequires:	gtk-doc >= 1.3
 # for LUKS devices
 Requires:	cryptsetup-luks
 # needed to pull in the system bus daemon
-Requires:	dbus >= -1:1.8.0
+Requires:	dbus >= 1.8.0
 # for mkfs.vfat
 Requires:	dosfstools
 # for mkfs.ext3, mkfs.ext3, e2label
