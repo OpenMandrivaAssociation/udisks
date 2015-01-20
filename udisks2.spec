@@ -34,6 +34,7 @@ BuildRequires:	intltool
 BuildRequires:	gnome-common
 BuildRequires:	gettext-devel
 BuildRequires:	gtk-doc >= 1.3
+BuildRequires:	pkgconfig(systemd)
 # for LUKS devices
 Requires:	cryptsetup-luks
 # needed to pull in the system bus daemon
