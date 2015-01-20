@@ -148,6 +148,8 @@ daemon. This package is for the udisks 2.x series.
 %patch4 -p1
 
 %build
+%global optlags %{opflags} -Qunused-arguments
+
 NOCONFIGURE=yes gnome-autogen.sh
 %configure \
 	--enable-gtk-doc \
