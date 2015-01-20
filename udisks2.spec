@@ -14,11 +14,10 @@ Group:		System/Libraries
 Url:		http://www.freedesktop.org/wiki/Software/udisks
 Source0:	http://udisks.freedesktop.org/releases/udisks-%{version}.tar.bz2
 Patch0:		udisks-1.92.0-link.patch
-Patch1:		udisks-2.1.0-mount-system-internal.patch
 # Mount to /media/user
 Patch2:		udisks-2.0.92-mount_in_media.patch
 # Mount to /media
-Patch3:		udisks-2.1.3-no-multiseat.patch
+Patch3:		udisks-2.1.4-no-multiseat.patch
 # From Debian/Ubuntu
 # As /media is not currently a tmpfs, we need to put the "mounted-fs" file to a persistent path
 Patch4:		udisks-2.1.3-mounted-fs.patch
@@ -141,7 +140,6 @@ daemon. This package is for the udisks 2.x series.
 %prep
 %setup -q -n udisks-%{version}
 %patch0 -p1
-%patch1 -p1
 %if %{with multiseat}
 %patch2 -p1
 %else
