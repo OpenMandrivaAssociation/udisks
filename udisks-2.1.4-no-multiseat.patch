@@ -1,25 +1,28 @@
-diff -Naur udisks-2.1.4/src/udiskslinuxfilesystem.c udisks-2.1.4.tpg/src/udiskslinuxfilesystem.c
---- udisks-2.1.4/src/udiskslinuxfilesystem.c	2014-12-18 11:00:34.000000000 +0000
-+++ udisks-2.1.4.tpg/src/udiskslinuxfilesystem.c	2015-01-20 18:30:37.697476606 +0000
-@@ -894,42 +894,10 @@
-   /* If we know the user-name and it doesn't have any '/' character in
-    * it, mount in /run/media/$USER
-    */
+diff -Naur udisks-2.1.5/src/udiskslinuxfilesystem.c udisks-2.1.5.tpg/src/udiskslinuxfilesystem.c
+--- udisks-2.1.5/src/udiskslinuxfilesystem.c	2015-03-01 16:02:12.000000000 +0000
++++ udisks-2.1.5.tpg/src/udiskslinuxfilesystem.c	2015-03-06 18:31:11.789384181 +0000
+@@ -894,44 +894,7 @@
+         }
+     }
+ 
+-  /* If we know the user-name and it doesn't have any '/' character in
+-   * it, mount in MOUNT_BASE/$USER
+-   */
 -  if (!fs_shared && (user_name != NULL && strstr (user_name, "/") == NULL))
 -    {
--      mount_dir = g_strdup_printf ("/run/media/%s", user_name);
+-      mount_dir = g_strdup_printf (MOUNT_BASE "/%s", user_name);
 -      if (!g_file_test (mount_dir, G_FILE_TEST_EXISTS))
 -        {
--          /* First ensure that /run/media exists */
--          if (g_mkdir ("/run/media", 0755) != 0 && errno != EEXIST)
+-          /* First ensure that MOUNT_BASE exists */
+-          if (g_mkdir (MOUNT_BASE, 0755) != 0 && errno != EEXIST)
 -            {
 -              g_set_error (error,
 -                           UDISKS_ERROR,
 -                           UDISKS_ERROR_FAILED,
--                           "Error creating directory /run/media: %m");
+-                           "Error creating directory " MOUNT_BASE ": %m");
 -              goto out;
 -            }
--          /* Then create the per-user /run/media/$USER */
+-          /* Then create the per-user MOUNT_BASE/$USER */
 -          if (g_mkdir (mount_dir, 0700) != 0 && errno != EEXIST)
 -            {
 -              g_set_error (error,
@@ -38,12 +41,9 @@ diff -Naur udisks-2.1.4/src/udiskslinuxfilesystem.c udisks-2.1.4.tpg/src/udisksl
 -            }
 -        }
 -    }
-   /* otherwise fall back to mounting in /media */
+-  /* otherwise fall back to mounting in /media */
 -  if (mount_dir == NULL)
--    mount_dir = g_strdup ("/media");
-+  // Remove code
-+  //if (mount_dir == NULL)
-+  mount_dir = g_strdup ("/media");
++    /* Mount device directly in /media directory */
+     mount_dir = g_strdup ("/media");
  
    /* NOTE: UTF-8 has the nice property that valid UTF-8 strings only contains
-    *       the byte 0x2F if it's for the '/' character (U+002F SOLIDUS).
