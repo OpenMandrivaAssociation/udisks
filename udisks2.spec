@@ -63,8 +63,8 @@ series.
 %{_datadir}/bash-completion/completions/udisksctl
 /lib/udev/rules.d/80-udisks2.rules
 %{_sbindir}/umount.udisks2
-%dir %{_prefix}/lib/udisks2
-%{_prefix}/lib/udisks2/udisksd
+%dir %{_libexecdir}/udisks2
+%{_libexecdir}/udisks2/udisksd
 %{_bindir}/udisksctl
 %{_mandir}/man1/*
 %{_mandir}/man8/*
