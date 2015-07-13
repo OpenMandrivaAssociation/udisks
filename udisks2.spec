@@ -23,6 +23,7 @@ BuildRequires:	pkgconfig(libatasmart) >= 0.19
 BuildRequires:	pkgconfig(polkit-gobject-1) >= 0.92
 BuildRequires:	pkgconfig(polkit-agent-1) >= 0.92
 BuildRequires:	pkgconfig(libsystemd-login) >= 186
+BuildRequires:	pkgconfig(libsystemd-daemon) >= 220
 BuildRequires:	intltool
 BuildRequires:	gnome-common
 BuildRequires:	gettext-devel
