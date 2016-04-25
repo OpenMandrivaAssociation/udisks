@@ -1,7 +1,7 @@
-diff -Naur udisks-2.1.5/src/udiskslinuxfilesystem.c udisks-2.1.5.tpg/src/udiskslinuxfilesystem.c
---- udisks-2.1.5/src/udiskslinuxfilesystem.c	2015-03-01 16:02:12.000000000 +0000
-+++ udisks-2.1.5.tpg/src/udiskslinuxfilesystem.c	2015-03-06 18:31:11.789384181 +0000
-@@ -894,44 +894,7 @@
+diff -Naur udisks-2.1.7/src/udiskslinuxfilesystem.c udisks-2.1.7.tpg/src/udiskslinuxfilesystem.c
+--- udisks-2.1.7/src/udiskslinuxfilesystem.c	2016-02-29 16:18:12.000000000 +0000
++++ udisks-2.1.7.tpg/src/udiskslinuxfilesystem.c	2016-04-25 19:02:04.812684846 +0000
+@@ -898,57 +898,7 @@
          }
      }
  
@@ -23,7 +23,11 @@ diff -Naur udisks-2.1.5/src/udiskslinuxfilesystem.c udisks-2.1.5.tpg/src/udisksl
 -              goto out;
 -            }
 -          /* Then create the per-user MOUNT_BASE/$USER */
+-#ifdef HAVE_ACL
 -          if (g_mkdir (mount_dir, 0700) != 0 && errno != EEXIST)
+-#else
+-          if (g_mkdir (mount_dir, 0750) != 0 && errno != EEXIST)
+-#endif
 -            {
 -              g_set_error (error,
 -                           UDISKS_ERROR,
@@ -33,8 +37,17 @@ diff -Naur udisks-2.1.5/src/udiskslinuxfilesystem.c udisks-2.1.5.tpg/src/udisksl
 -              goto out;
 -            }
 -          /* Finally, add the read+execute ACL for $USER */
+-#ifdef HAVE_ACL
 -          if (!add_acl (mount_dir, uid, error))
 -            {
+-#else
+-          if (chown (mount_dir, -1, gid) == -1)
+-            {
+-               g_set_error (error, G_IO_ERROR,
+-                            g_io_error_from_errno (errno),
+-                            "Failed to change gid to %d for %s: %m",
+-                            (gint) gid, mount_dir);
+-#endif
 -              if (rmdir (mount_dir) != 0)
 -                udisks_warning ("Error calling rmdir() on %s: %m", mount_dir);
 -              goto out;
@@ -43,7 +56,7 @@ diff -Naur udisks-2.1.5/src/udiskslinuxfilesystem.c udisks-2.1.5.tpg/src/udisksl
 -    }
 -  /* otherwise fall back to mounting in /media */
 -  if (mount_dir == NULL)
-+    /* Mount device directly in /media directory */
++  /* Mount device directly in /media directory */
      mount_dir = g_strdup ("/media");
  
    /* NOTE: UTF-8 has the nice property that valid UTF-8 strings only contains

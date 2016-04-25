@@ -5,13 +5,15 @@
 
 Summary:	Disk Manager
 Name:		udisks2
-Version:	2.1.6
-Release:	4
+Version:	2.1.7
+Release:	1
 License:	GPLv2+
 Group:		System/Libraries
 Url:		http://www.freedesktop.org/wiki/Software/udisks
 Source0:	http://udisks.freedesktop.org/releases/udisks-%{version}.tar.bz2
 Patch0:		udisks-1.92.0-link.patch
+# (tpg) from upstream git
+Patch1:		0000-Reread-partition-table-before-wiping-when-creating-n.patch
 # Mount to /media
 Patch3:		udisks-2.1.4-no-multiseat.patch
 BuildRequires:	pkgconfig(gio-unix-2.0) >= 2.31.13
@@ -49,7 +51,9 @@ Requires:	udev >= 186
 Requires:	util-linux
 # for mkfs.xfs, xfs_admin
 Requires:	xfsprogs
-
+# flash friendly filesystem
+Requires:	f2fs-tools
+Requires:	btrfs-progs
 # for /proc/self/mountinfo, only available in 2.6.26 or higher
 Conflicts:	kernel < 2.6.26
 
@@ -134,8 +138,7 @@ daemon. This package is for the udisks 2.x series.
 
 %prep
 %setup -q -n udisks-%{version}
-%patch0 -p1
-%patch3 -p1
+%apply_patches
 
 %build
 %global optlags %{opflags} -Qunused-arguments
@@ -154,4 +157,3 @@ NOCONFIGURE=yes gnome-autogen.sh
 mkdir -p %{buildroot}/%{_localstatedir}/lib/udisks2
 
 %find_lang %{name} %{name}.lang
-
