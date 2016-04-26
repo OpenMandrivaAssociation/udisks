@@ -1,5 +1,3 @@
-%bcond_with multiseat
-
 %define major 0
 %define libname %mklibname %{name}_ %{major}
 %define devname %mklibname %{name} -d
@@ -7,21 +5,17 @@
 
 Summary:	Disk Manager
 Name:		udisks2
-Version:	2.1.3
-Release:	3
+Version:	2.1.7
+Release:	0.1
 License:	GPLv2+
 Group:		System/Libraries
 Url:		http://www.freedesktop.org/wiki/Software/udisks
 Source0:	http://udisks.freedesktop.org/releases/udisks-%{version}.tar.bz2
 Patch0:		udisks-1.92.0-link.patch
-Patch1:		udisks-2.1.0-mount-system-internal.patch
-# Mount to /media/user
-Patch2:		udisks-2.0.92-mount_in_media.patch
+# (tpg) from upstream git
+Patch1:		0000-Reread-partition-table-before-wiping-when-creating-n.patch
 # Mount to /media
-Patch3:		udisks-2.1.3-no-multiseat.patch
-# From Debian/Ubuntu
-# As /media is not currently a tmpfs, we need to put the "mounted-fs" file to a persistent path
-Patch4:		udisks-2.1.3-mounted-fs.patch
+Patch3:		udisks-2.1.4-no-multiseat.patch
 BuildRequires:	pkgconfig(gio-unix-2.0) >= 2.31.13
 BuildRequires:	pkgconfig(gmodule-2.0)
 BuildRequires:	pkgconfig(glib-2.0) >= 2.31.13
@@ -31,10 +25,12 @@ BuildRequires:	pkgconfig(libatasmart) >= 0.19
 BuildRequires:	pkgconfig(polkit-gobject-1) >= 0.92
 BuildRequires:	pkgconfig(polkit-agent-1) >= 0.92
 BuildRequires:	pkgconfig(libsystemd-login) >= 186
+BuildRequires:	pkgconfig(libsystemd-daemon) >= 186
 BuildRequires:	intltool
 BuildRequires:	gnome-common
 BuildRequires:	gettext-devel
 BuildRequires:	gtk-doc >= 1.3
+BuildRequires:	systemd-units
 # for LUKS devices
 Requires:	cryptsetup-luks
 # needed to pull in the system bus daemon
@@ -55,7 +51,9 @@ Requires:	udev >= 186
 Requires:	util-linux
 # for mkfs.xfs, xfs_admin
 Requires:	xfsprogs
-
+# flash friendly filesystem
+Requires:	f2fs-tools
+Requires:	btrfs-progs
 # for /proc/self/mountinfo, only available in 2.6.26 or higher
 Conflicts:	kernel < 2.6.26
 
@@ -70,8 +68,8 @@ series.
 %{_datadir}/bash-completion/completions/udisksctl
 /lib/udev/rules.d/80-udisks2.rules
 %{_sbindir}/umount.udisks2
-%dir %{_prefix}/lib/udisks2
-%{_prefix}/lib/udisks2/udisksd
+%dir %{_libexecdir}/udisks2
+%{_libexecdir}/udisks2/udisksd
 %{_bindir}/udisksctl
 %{_mandir}/man1/*
 %{_mandir}/man8/*
@@ -140,18 +138,13 @@ daemon. This package is for the udisks 2.x series.
 
 %prep
 %setup -q -n udisks-%{version}
-%patch0 -p1
-%patch1 -p1
-%if %{with multiseat}
-%patch2 -p1
-%else
-%patch3 -p1
-%endif
-%patch4 -p1
+%apply_patches
 
 %build
+
 NOCONFIGURE=yes gnome-autogen.sh
 %configure2_5x \
+	--enable-fhs-media \
 	--enable-gtk-doc \
 	--disable-static \
 	--with-systemdsystemunitdir=%{_unitdir}
@@ -163,4 +156,3 @@ NOCONFIGURE=yes gnome-autogen.sh
 mkdir -p %{buildroot}/%{_localstatedir}/lib/udisks2
 
 %find_lang %{name} %{name}.lang
-
