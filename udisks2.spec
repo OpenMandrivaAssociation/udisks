@@ -6,7 +6,7 @@
 Summary:	Disk Manager
 Name:		udisks2
 Version:	2.1.7
-Release:	1
+Release:	2
 License:	GPLv2+
 Group:		System/Libraries
 Url:		http://www.freedesktop.org/wiki/Software/udisks
@@ -54,6 +54,7 @@ Requires:	xfsprogs
 # flash friendly filesystem
 Requires:	f2fs-tools
 Requires:	btrfs-progs
+Requires:	exfat-utils
 # for /proc/self/mountinfo, only available in 2.6.26 or higher
 Conflicts:	kernel < 2.6.26
 
