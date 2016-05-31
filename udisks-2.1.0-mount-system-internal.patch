@@ -1,5 +1,6 @@
---- a/data/org.freedesktop.udisks2.policy.in	2013-01-07 03:45:52.000000000 +0400
-+++ b/data/org.freedesktop.udisks2.policy.in	2013-06-20 14:15:07.543433797 +0400
+diff -Naur udisks-2.1.7/data/org.freedesktop.udisks2.policy.in udisks-2.1.7.tpg/data/org.freedesktop.udisks2.policy.in
+--- udisks-2.1.7/data/org.freedesktop.udisks2.policy.in	2016-02-29 16:18:12.000000000 +0000
++++ udisks-2.1.7.tpg/data/org.freedesktop.udisks2.policy.in	2016-05-31 16:39:48.253591934 +0000
 @@ -29,7 +29,7 @@
      <defaults>
        <allow_any>auth_admin</allow_any>

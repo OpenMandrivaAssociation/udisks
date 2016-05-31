@@ -6,7 +6,7 @@
 Summary:	Disk Manager
 Name:		udisks2
 Version:	2.1.7
-Release:	0.1
+Release:	0.2
 License:	GPLv2+
 Group:		System/Libraries
 Url:		http://www.freedesktop.org/wiki/Software/udisks
@@ -14,6 +14,7 @@ Source0:	http://udisks.freedesktop.org/releases/udisks-%{version}.tar.bz2
 Patch0:		udisks-1.92.0-link.patch
 # (tpg) from upstream git
 Patch1:		0000-Reread-partition-table-before-wiping-when-creating-n.patch
+Patch2:		udisks-2.1.0-mount-system-internal.patch
 # Mount to /media
 Patch3:		udisks-2.1.4-no-multiseat.patch
 BuildRequires:	pkgconfig(gio-unix-2.0) >= 2.31.13
