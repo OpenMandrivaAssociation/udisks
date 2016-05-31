@@ -25,13 +25,11 @@ BuildRequires:	pkgconfig(gudev-1.0) >= 186
 BuildRequires:	pkgconfig(libatasmart) >= 0.19
 BuildRequires:	pkgconfig(polkit-gobject-1) >= 0.92
 BuildRequires:	pkgconfig(polkit-agent-1) >= 0.92
-BuildRequires:	pkgconfig(libsystemd-login) >= 186
-BuildRequires:	pkgconfig(libsystemd-daemon) >= 220
+BuildRequires:	pkgconfig(libsystemd) >= 230
 BuildRequires:	intltool
 BuildRequires:	gnome-common
 BuildRequires:	gettext-devel
 BuildRequires:	gtk-doc >= 1.3
-BuildRequires:	pkgconfig(systemd)
 # for LUKS devices
 Requires:	cryptsetup-luks
 # needed to pull in the system bus daemon
