@@ -1,0 +1,12 @@
+diff -Naur udisks-2.1.7/data/org.freedesktop.udisks2.policy.in udisks-2.1.7.tpg/data/org.freedesktop.udisks2.policy.in
+--- udisks-2.1.7/data/org.freedesktop.udisks2.policy.in	2016-02-29 16:18:12.000000000 +0000
++++ udisks-2.1.7.tpg/data/org.freedesktop.udisks2.policy.in	2016-05-31 16:39:48.253591934 +0000
+@@ -29,7 +29,7 @@
+     <defaults>
+       <allow_any>auth_admin</allow_any>
+       <allow_inactive>auth_admin</allow_inactive>
+-      <allow_active>auth_admin_keep</allow_active>
++      <allow_active>yes</allow_active>
+     </defaults>
+   </action>
+ 
