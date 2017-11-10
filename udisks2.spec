@@ -5,16 +5,16 @@
 
 Summary:	Disk Manager
 Name:		udisks2
-Version:	2.1.8
+Version:	2.7.4
 Release:	1
 License:	GPLv2+
 Group:		System/Libraries
 Url:		http://www.freedesktop.org/wiki/Software/udisks
-Source0:	http://udisks.freedesktop.org/releases/udisks-%{version}.tar.bz2
+Source:		https://github.com/storaged-project/udisks/archive/udisks-%{version}.tar.bz2
 Patch0:		udisks-1.92.0-link.patch
 Patch2:		udisks-2.1.0-mount-system-internal.patch
 # Mount to /media
-Patch3:		udisks-2.1.4-no-multiseat.patch
+#Patch3:		udisks-2.1.4-no-multiseat.patch
 BuildRequires:	pkgconfig(gio-unix-2.0) >= 2.31.13
 BuildRequires:	pkgconfig(gmodule-2.0)
 BuildRequires:	pkgconfig(glib-2.0) >= 2.31.13
@@ -61,8 +61,8 @@ managing disks and storage devices. This package is for the udisks 2.x
 series.
 
 %files -f %{name}.lang
-%doc README AUTHORS NEWS COPYING HACKING
 %{_sysconfdir}/dbus-1/system.d/org.freedesktop.UDisks2.conf
+%{_sysconfdir}/udisks2/udisks2.conf
 %{_datadir}/bash-completion/completions/udisksctl
 /lib/udev/rules.d/80-udisks2.rules
 %{_sbindir}/umount.udisks2
@@ -70,10 +70,12 @@ series.
 %{_libexecdir}/udisks2/udisksd
 %{_bindir}/udisksctl
 %{_mandir}/man1/*
+%{_mandir}/man5/*
 %{_mandir}/man8/*
-%{_datadir}/polkit-1/actions/org.freedesktop.udisks2.policy
+%{_datadir}/polkit-1/actions/org.freedesktop.UDisks2.policy
 %{_datadir}/dbus-1/system-services/org.freedesktop.UDisks2.service
 %{_unitdir}/udisks2.service
+%{_unitdir}/clean-mount-point@.service
 # Permissions for local state data are 0700 to avoid leaking information
 # about e.g. mounts to unprivileged users
 %attr(0700,root,root) %dir %{_localstatedir}/lib/udisks2
@@ -123,6 +125,7 @@ libudisks2, a dynamic library, which provides access to the udisks
 daemon. This package is for the udisks 2.x series.
 
 %files -n %{devname}
+%doc AUTHORS NEWS COPYING HACKING
 %{_libdir}/libudisks2.so
 %dir %{_includedir}/udisks2
 %dir %{_includedir}/udisks2/udisks
