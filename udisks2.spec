@@ -25,8 +25,11 @@ BuildRequires:	pkgconfig(polkit-gobject-1) >= 0.92
 BuildRequires:	pkgconfig(polkit-agent-1) >= 0.92
 BuildRequires:	pkgconfig(libsystemd) >= 230
 BuildRequires:	pkgconfig(blockdev)
+BuildRequires:	bd_part-devel
 BuildRequires:	bd_loop-devel
 BuildRequires:	bd_swap-devel
+BuildRequires:	bd_fs-devel
+BuildRequires:	bd_crypto-devel
 BuildRequires:	intltool
 BuildRequires:	gnome-common
 BuildRequires:	gettext-devel
