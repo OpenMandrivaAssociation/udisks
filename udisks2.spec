@@ -5,8 +5,8 @@
 
 Summary:	Disk Manager
 Name:		udisks2
-Version:	2.7.6
-Release:	2
+Version:	2.7.7
+Release:	1
 License:	GPLv2+
 Group:		System/Libraries
 Url:		http://www.freedesktop.org/wiki/Software/udisks
@@ -24,6 +24,7 @@ BuildRequires:	pkgconfig(libatasmart) >= 0.19
 BuildRequires:	pkgconfig(polkit-gobject-1) >= 0.92
 BuildRequires:	pkgconfig(polkit-agent-1) >= 0.92
 BuildRequires:	pkgconfig(libsystemd) >= 230
+BuildRequires:	systemd
 BuildRequires:	pkgconfig(blockdev)
 BuildRequires:	bd_mdraid-devel
 BuildRequires:	bd_part-devel
@@ -82,8 +83,8 @@ series.
 %{_mandir}/man8/*
 %{_datadir}/polkit-1/actions/org.freedesktop.UDisks2.policy
 %{_datadir}/dbus-1/system-services/org.freedesktop.UDisks2.service
-%{_unitdir}/udisks2.service
-%{_unitdir}/clean-mount-point@.service
+%{_systemunitdir}/udisks2.service
+%{_systemuunitdir}/clean-mount-point@.service
 # Permissions for local state data are 0700 to avoid leaking information
 # about e.g. mounts to unprivileged users
 %attr(0700,root,root) %dir %{_localstatedir}/lib/udisks2
@@ -157,7 +158,7 @@ NOCONFIGURE=yes gnome-autogen.sh
 	--enable-fhs-media \
 	--enable-gtk-doc \
 	--disable-static \
-	--with-systemdsystemunitdir=%{_unitdir}
+	--with-systemdsystemunitdir=%{_systemunitdir}
 %make
 
 %install
