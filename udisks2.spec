@@ -10,7 +10,7 @@ Release:	1
 License:	GPLv2+
 Group:		System/Libraries
 Url:		http://www.freedesktop.org/wiki/Software/udisks
-Source:		https://github.com/storaged-project/udisks/releases/download/udisks-%{version}/udisks-%{version}.tar.bz2
+Source0:	https://github.com/storaged-project/udisks/releases/download/udisks-%{version}/udisks-%{version}.tar.bz2
 #Patch0:		udisks-1.92.0-link.patch
 Patch2:		udisks-2.1.0-mount-system-internal.patch
 # Mount to /media
@@ -83,8 +83,8 @@ series.
 %{_mandir}/man8/*
 %{_datadir}/polkit-1/actions/org.freedesktop.UDisks2.policy
 %{_datadir}/dbus-1/system-services/org.freedesktop.UDisks2.service
-%{_systemunitdir}/udisks2.service
-%{_systemuunitdir}/clean-mount-point@.service
+%{_unitdir}/udisks2.service
+%{_unitdir}/clean-mount-point@.service
 # Permissions for local state data are 0700 to avoid leaking information
 # about e.g. mounts to unprivileged users
 %attr(0700,root,root) %dir %{_localstatedir}/lib/udisks2
@@ -158,7 +158,7 @@ NOCONFIGURE=yes gnome-autogen.sh
 	--enable-fhs-media \
 	--enable-gtk-doc \
 	--disable-static \
-	--with-systemdsystemunitdir=%{_systemunitdir}
+	--with-systemdunitdir=%{_unitdir}
 %make
 
 %install
