@@ -4,13 +4,13 @@
 %define girname %mklibname udisks-gir 2.0
 
 Summary:	Disk Manager
-Name:		udisks2
-Version:	2.7.7
+Name:		udisks
+Version:	2.8.0
 Release:	1
 License:	GPLv2+
 Group:		System/Libraries
 Url:		http://www.freedesktop.org/wiki/Software/udisks
-Source0:	https://github.com/storaged-project/udisks/releases/download/udisks-%{version}/udisks-%{version}.tar.bz2
+Source0:	https://github.com/storaged-project/udisks/releases/download/%{name}-%{version}/udisks-%{version}.tar.bz2
 #Patch0:		udisks-1.92.0-link.patch
 Patch2:		udisks-2.1.0-mount-system-internal.patch
 # Mount to /media
@@ -24,7 +24,7 @@ BuildRequires:	pkgconfig(libatasmart) >= 0.19
 BuildRequires:	pkgconfig(polkit-gobject-1) >= 0.92
 BuildRequires:	pkgconfig(polkit-agent-1) >= 0.92
 BuildRequires:	pkgconfig(libsystemd) >= 230
-BuildRequires:	systemd
+BuildRequires:	systemd-macros
 BuildRequires:	pkgconfig(blockdev)
 BuildRequires:	bd_mdraid-devel
 BuildRequires:	bd_part-devel
@@ -63,6 +63,7 @@ Requires:	btrfs-progs
 Requires:	exfat-utils
 # for /proc/self/mountinfo, only available in 2.6.26 or higher
 Conflicts:	kernel < 2.6.26
+%rename	udisks2
 
 %description
 udisks provides a daemon, D-Bus API and command line tools for
@@ -147,8 +148,7 @@ daemon. This package is for the udisks 2.x series.
 #----------------------------------------------------------------------------
 
 %prep
-%setup -q -n udisks-%{version}
-%apply_patches
+%autosetup -p1
 
 %build
 %global optlags %{opflags} -Qunused-arguments
@@ -159,10 +159,10 @@ NOCONFIGURE=yes gnome-autogen.sh
 	--enable-gtk-doc \
 	--disable-static \
 	--with-systemdunitdir=%{_unitdir}
-%make
+%make_build
 
 %install
-%makeinstall_std
+%make_install
 
 mkdir -p %{buildroot}/%{_localstatedir}/lib/udisks2
 
