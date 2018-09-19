@@ -158,7 +158,9 @@ NOCONFIGURE=yes gnome-autogen.sh
 	--enable-fhs-media \
 	--enable-gtk-doc \
 	--disable-static \
-	--with-systemdunitdir=%{_unitdir}
+	--with-udevdir="/lib/udev" \
+	--with-systemdunitdir="%{_unitdir}"
+
 %make_build
 
 %install
