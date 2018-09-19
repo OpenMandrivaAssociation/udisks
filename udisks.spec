@@ -166,4 +166,4 @@ NOCONFIGURE=yes gnome-autogen.sh
 
 mkdir -p %{buildroot}/%{_localstatedir}/lib/udisks2
 
-%find_lang %{name} %{name}.lang
+%find_lang %{name}2 %{name}.lang
