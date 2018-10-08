@@ -3,18 +3,17 @@
 %define devname %mklibname %{name} -d
 %define girname %mklibname udisks-gir 2.0
 
+## NOTE STOP STOP enabling crap like in
+## 788fb4a470add500a847b7c129b1ed6502b8957b ( mounting all HDDs as user )
+## !!!!DO NOT DO THAT!!!! - crazy -
 Summary:	Disk Manager
 Name:		udisks
 Version:	2.8.1
-Release:	1
+Release:	2
 License:	GPLv2+
 Group:		System/Libraries
 Url:		http://www.freedesktop.org/wiki/Software/udisks
 Source0:	https://github.com/storaged-project/udisks/releases/download/%{name}-%{version}/udisks-%{version}.tar.bz2
-#Patch0:		udisks-1.92.0-link.patch
-Patch2:		udisks-2.1.0-mount-system-internal.patch
-# Mount to /media
-#Patch3:		udisks-2.1.4-no-multiseat.patch
 BuildRequires:	pkgconfig(gio-unix-2.0) >= 2.31.13
 BuildRequires:	pkgconfig(gmodule-2.0)
 BuildRequires:	pkgconfig(glib-2.0) >= 2.31.13
