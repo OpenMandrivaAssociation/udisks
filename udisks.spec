@@ -8,8 +8,8 @@
 ## !!!!DO NOT DO THAT!!!! - crazy -
 Summary:	Disk Manager
 Name:		udisks
-Version:	2.8.1
-Release:	3
+Version:	2.8.2
+Release:	1
 License:	GPLv2+
 Group:		System/Libraries
 Url:		http://www.freedesktop.org/wiki/Software/udisks
