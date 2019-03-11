@@ -9,7 +9,7 @@
 Summary:	Disk Manager
 Name:		udisks
 Version:	2.8.2
-Release:	1
+Release:	2
 License:	GPLv2+
 Group:		System/Libraries
 Url:		http://www.freedesktop.org/wiki/Software/udisks
@@ -83,6 +83,7 @@ series.
 %{_mandir}/man8/*
 %{_datadir}/polkit-1/actions/org.freedesktop.UDisks2.policy
 %{_datadir}/dbus-1/system-services/org.freedesktop.UDisks2.service
+%{_presetdir}/86-%{name}.preset
 %{_unitdir}/udisks2.service
 %{_unitdir}/clean-mount-point@.service
 # Permissions for local state data are 0700 to avoid leaking information
@@ -166,5 +167,12 @@ NOCONFIGURE=yes gnome-autogen.sh
 %make_install
 
 mkdir -p %{buildroot}/%{_localstatedir}/lib/udisks2
+
+# (tpg) disable it by default 
+# https://github.com/storaged-project/udisks/issues/535
+install -d %{buildroot}%{_presetdir}
+cat > %{buildroot}%{_presetdir}/86-%{name}.preset << EOF
+disable udisks2.service
+EOF
 
 %find_lang %{name}2 %{name}.lang
