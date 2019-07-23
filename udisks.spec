@@ -168,7 +168,7 @@ NOCONFIGURE=yes gnome-autogen.sh
 
 mkdir -p %{buildroot}/%{_localstatedir}/lib/udisks2
 
-# (tpg) disable it by default 
+# (tpg) disable it by default
 # https://github.com/storaged-project/udisks/issues/535
 install -d %{buildroot}%{_presetdir}
 cat > %{buildroot}%{_presetdir}/86-%{name}.preset << EOF
