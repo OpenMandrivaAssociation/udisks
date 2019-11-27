@@ -9,7 +9,7 @@
 Summary:	Disk Manager
 Name:		udisks
 Version:	2.8.4
-Release:	2
+Release:	3
 License:	GPLv2+
 Group:		System/Libraries
 Url:		http://www.freedesktop.org/wiki/Software/udisks
@@ -35,6 +35,13 @@ BuildRequires:	intltool
 BuildRequires:	gnome-common
 BuildRequires:	gettext-devel
 BuildRequires:	gtk-doc >= 1.3
+# pull libblockdev plugins
+Requires:	libblockdev-mdraid
+Requires:	libblockdev-part
+Requires:	libblockdev-loop
+Requires:	libblockdev-swap
+Requires:	libblockdev-fs
+Requires:	libblockdev-crypto
 # for LUKS devices
 Requires:	cryptsetup-luks
 # needed to pull in the system bus daemon
@@ -62,6 +69,7 @@ Requires:	exfat-utils
 # for /proc/self/mountinfo, only available in 2.6.26 or higher
 Conflicts:	kernel < 2.6.26
 %rename	udisks2
+%rename	storaged
 
 %description
 udisks provides a daemon, D-Bus API and command line tools for
