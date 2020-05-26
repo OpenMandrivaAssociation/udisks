@@ -79,6 +79,7 @@ series.
 %files -f %{name}.lang
 %{_datadir}/dbus-1/system.d/org.freedesktop.UDisks2.conf
 %{_sysconfdir}/udisks2/udisks2.conf
+%{_sysconfdir}/udisks2/mount_options.conf.example
 %{_datadir}/bash-completion/completions/udisksctl
 /lib/udev/rules.d/80-udisks2.rules
 %{_sbindir}/umount.udisks2
