@@ -92,7 +92,6 @@ series.
 %{_datadir}/dbus-1/system-services/org.freedesktop.UDisks2.service
 %{_presetdir}/86-%{name}.preset
 %{_unitdir}/udisks2.service
-%{_unitdir}/clean-mount-point@.service
 # Permissions for local state data are 0700 to avoid leaking information
 # about e.g. mounts to unprivileged users
 %attr(0700,root,root) %dir %{_localstatedir}/lib/udisks2
