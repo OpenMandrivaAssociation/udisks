@@ -8,8 +8,8 @@
 ## !!!!DO NOT DO THAT!!!! - crazy -
 Summary:	Disk Manager
 Name:		udisks
-Version:	2.8.4
-Release:	4
+Version:	2.9.0
+Release:	1
 License:	GPLv2+
 Group:		System/Libraries
 Url:		http://www.freedesktop.org/wiki/Software/udisks
@@ -79,6 +79,7 @@ series.
 %files -f %{name}.lang
 %{_datadir}/dbus-1/system.d/org.freedesktop.UDisks2.conf
 %{_sysconfdir}/udisks2/udisks2.conf
+%{_sysconfdir}/udisks2/mount_options.conf.example
 %{_datadir}/bash-completion/completions/udisksctl
 /lib/udev/rules.d/80-udisks2.rules
 %{_sbindir}/umount.udisks2
@@ -92,7 +93,6 @@ series.
 %{_datadir}/dbus-1/system-services/org.freedesktop.UDisks2.service
 %{_presetdir}/86-%{name}.preset
 %{_unitdir}/udisks2.service
-%{_unitdir}/clean-mount-point@.service
 # Permissions for local state data are 0700 to avoid leaking information
 # about e.g. mounts to unprivileged users
 %attr(0700,root,root) %dir %{_localstatedir}/lib/udisks2
