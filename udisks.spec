@@ -9,7 +9,7 @@
 Summary:	Disk Manager
 Name:		udisks
 Version:	2.9.0
-Release:	1
+Release:	2
 License:	GPLv2+
 Group:		System/Libraries
 Url:		http://www.freedesktop.org/wiki/Software/udisks
@@ -24,6 +24,7 @@ BuildRequires:	pkgconfig(polkit-gobject-1) >= 0.92
 BuildRequires:	pkgconfig(polkit-agent-1) >= 0.92
 BuildRequires:	pkgconfig(libsystemd) >= 230
 BuildRequires:	systemd-macros
+BuildRequires:	pkgconfig(libacl)
 BuildRequires:	pkgconfig(blockdev)
 BuildRequires:	bd_mdraid-devel
 BuildRequires:	bd_part-devel
@@ -35,6 +36,7 @@ BuildRequires:	intltool
 BuildRequires:	gnome-common
 BuildRequires:	gettext-devel
 BuildRequires:	gtk-doc >= 1.3
+BuildRequires:	chrpath
 # pull libblockdev plugins
 Requires:	libblockdev-mdraid
 Requires:	libblockdev-part
@@ -174,6 +176,10 @@ NOCONFIGURE=yes gnome-autogen.sh
 %make_install
 
 mkdir -p %{buildroot}/%{_localstatedir}/lib/udisks2
+
+chrpath --delete %{buildroot}/%{_sbindir}/umount.udisks2
+chrpath --delete %{buildroot}/%{_bindir}/udisksctl
+chrpath --delete %{buildroot}/%{_libexecdir}/udisks2/udisksd
 
 # (tpg) disable it by default
 # https://github.com/storaged-project/udisks/issues/535
