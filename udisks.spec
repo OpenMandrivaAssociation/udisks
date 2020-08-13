@@ -3,13 +3,10 @@
 %define devname %mklibname %{name} -d
 %define girname %mklibname udisks-gir 2.0
 
-## NOTE STOP STOP enabling crap like in
-## 788fb4a470add500a847b7c129b1ed6502b8957b ( mounting all HDDs as user )
-## !!!!DO NOT DO THAT!!!! - crazy -
 Summary:	Disk Manager
 Name:		udisks
-Version:	2.9.0
-Release:	2
+Version:	2.9.1
+Release:	1
 License:	GPLv2+
 Group:		System/Libraries
 Url:		http://www.freedesktop.org/wiki/Software/udisks
