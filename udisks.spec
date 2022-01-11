@@ -20,7 +20,7 @@ BuildRequires:	pkgconfig(libatasmart) >= 0.19
 BuildRequires:	pkgconfig(polkit-gobject-1) >= 0.92
 BuildRequires:	pkgconfig(polkit-agent-1) >= 0.92
 BuildRequires:	pkgconfig(libsystemd) >= 230
-BuildRequires:	systemd-macros
+BuildRequires:	systemd-rpm-macros
 BuildRequires:	pkgconfig(libacl)
 BuildRequires:	pkgconfig(blockdev)
 BuildRequires:	bd_mdraid-devel
