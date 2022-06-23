@@ -6,7 +6,7 @@
 Summary:	Disk Manager
 Name:		udisks
 Version:	2.9.4
-Release:	3
+Release:	4
 License:	GPLv2+
 Group:		System/Libraries
 Url:		http://www.freedesktop.org/wiki/Software/udisks
@@ -69,6 +69,7 @@ Requires:	exfat-utils
 Conflicts:	kernel < 2.6.26
 %rename	udisks2
 %rename	storaged
+%{?systemd_requires}
 
 %description
 udisks provides a daemon, D-Bus API and command line tools for
@@ -80,14 +81,14 @@ series.
 %{_sysconfdir}/udisks2/udisks2.conf
 %{_sysconfdir}/udisks2/mount_options.conf.example
 %{_datadir}/bash-completion/completions/udisksctl
-/lib/udev/rules.d/80-udisks2.rules
+%{_udevrulesdir}/80-udisks2.rules
 %{_sbindir}/umount.udisks2
 %dir %{_libexecdir}/udisks2
 %{_libexecdir}/udisks2/udisksd
 %{_bindir}/udisksctl
-%{_mandir}/man1/*
-%{_mandir}/man5/*
-%{_mandir}/man8/*
+%doc %{_mandir}/man1/*
+%doc %{_mandir}/man5/*
+%doc %{_mandir}/man8/*
 %{_datadir}/polkit-1/actions/org.freedesktop.UDisks2.policy
 %{_datadir}/dbus-1/system-services/org.freedesktop.UDisks2.service
 %{_presetdir}/86-%{name}.preset
@@ -164,8 +165,11 @@ NOCONFIGURE=yes gnome-autogen.sh
 	--enable-fhs-media \
 	--enable-gtk-doc \
 	--disable-static \
-	--with-udevdir="/lib/udev" \
-	--with-systemdunitdir="%{_unitdir}"
+	--with-udevdir="$(dirname %{_udevrulesdir})" \
+	--with-systemdsystemunitdir="%{_unitdir}" \
+	--with-tmpfilesdir=%{_tmpfilesdir} \
+	--with-modloaddir=%{_modulesloaddir} \
+	--with-modprobedir=%{_modprobedir}
 
 %make_build
 
@@ -186,3 +190,16 @@ disable udisks2.service
 EOF
 
 %find_lang %{name}2 %{name}.lang
+
+%post -n %{name}
+%systemd_post udisks2.service
+if [ -S /run/udev/control ]; then
+    udevadm control --reload
+    udevadm trigger
+fi
+
+%preun -n %{name}
+%systemd_preun udisks2.service
+
+%postun -n %{name}
+%systemd_postun_with_restart udisks2.service
