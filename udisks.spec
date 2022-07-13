@@ -6,11 +6,15 @@
 Summary:	Disk Manager
 Name:		udisks
 Version:	2.9.4
-Release:	4
+Release:	5
 License:	GPLv2+
 Group:		System/Libraries
 Url:		http://www.freedesktop.org/wiki/Software/udisks
 Source0:	https://github.com/storaged-project/udisks/releases/download/%{name}-%{version}/udisks-%{version}.tar.bz2
+# At this time (kernel 5.18.11), NTFS3 doesn't support the "windows_names"
+# mount option from old ntfs-3g fuse.
+# Don't try to mount ntfs partitions with it.
+Patch0:		udisks-2.9.4-ntfs3.patch
 BuildRequires:	pkgconfig(gio-unix-2.0) >= 2.31.13
 BuildRequires:	pkgconfig(gmodule-2.0)
 BuildRequires:	pkgconfig(glib-2.0) >= 2.31.13

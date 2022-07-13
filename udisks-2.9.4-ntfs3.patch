@@ -1,0 +1,63 @@
+diff -up udisks-2.9.4/data/builtin_mount_options.conf.omv~ udisks-2.9.4/data/builtin_mount_options.conf
+--- udisks-2.9.4/data/builtin_mount_options.conf.omv~	2022-07-13 17:38:45.038195865 +0200
++++ udisks-2.9.4/data/builtin_mount_options.conf	2022-07-13 17:38:52.246234114 +0200
+@@ -9,8 +9,8 @@ exfat_defaults=uid=$UID,gid=$GID,iochars
+ exfat_allow=uid=$UID,gid=$GID,dmask,errors,fmask,iocharset,namecase,umask
+ 
+ # ntfs3, ntfs-3g and the legacy ntfs kernel driver options
+-ntfs_defaults=uid=$UID,gid=$GID,windows_names
+-ntfs_allow=uid=$UID,gid=$GID,umask,dmask,fmask,locale,norecover,ignore_case,windows_names,compression,nocompression,big_writes,nls,nohidden,sys_immutable,sparse,showmeta,prealloc
++ntfs_defaults=uid=$UID,gid=$GID
++ntfs_allow=uid=$UID,gid=$GID,umask,dmask,fmask,locale,norecover,ignore_case,compression,nocompression,big_writes,nls,nohidden,sys_immutable,sparse,showmeta,prealloc
+ 
+ iso9660_defaults=uid=$UID,gid=$GID,iocharset=utf8,mode=0400,dmode=0500
+ iso9660_allow=uid=$UID,gid=$GID,norock,nojoliet,iocharset,mode,dmode
+diff -up udisks-2.9.4/doc/configurable_mount_options.xml.omv~ udisks-2.9.4/doc/configurable_mount_options.xml
+--- udisks-2.9.4/doc/configurable_mount_options.xml.omv~	2022-07-13 17:39:36.793469552 +0200
++++ udisks-2.9.4/doc/configurable_mount_options.xml	2022-07-13 17:39:59.176587274 +0200
+@@ -131,8 +131,8 @@ allow=exec,noexec,nodev,nosuid,atime,noa
+ # specific filesystem type options
+ vfat_defaults=uid=$UID,gid=$GID,shortname=mixed,utf8=1,showexec,flush
+ vfat_allow=uid=$UID,gid=$GID,flush,utf8,shortname,umask,dmask,fmask,codepage,iocharset,usefree,showexec
+-ntfs_defaults=uid=$UID,gid=$GID,windows_names
+-ntfs_allow=uid=$UID,gid=$GID,umask,dmask,fmask,locale,norecover,ignore_case,windows_names
++ntfs_defaults=uid=$UID,gid=$GID
++ntfs_allow=uid=$UID,gid=$GID,umask,dmask,fmask,locale,norecover,ignore_case
+ 
+ [/dev/disk/by-uuid/18afd8f0-0d86-4d96-8de0-5f92d2ee9800]
+ vfat_defaults=uid=$UID,gid=$GID,noexec
+diff -up udisks-2.9.4/doc/html/mount_options.html.omv~ udisks-2.9.4/doc/html/mount_options.html
+--- udisks-2.9.4/doc/html/mount_options.html.omv~	2022-07-13 17:38:58.279266087 +0200
++++ udisks-2.9.4/doc/html/mount_options.html	2022-07-13 17:39:28.247424516 +0200
+@@ -105,8 +105,8 @@
+ <span class="n">exfat_allow</span><span class="o">=</span><span class="n">uid</span><span class="o">=</span><span class="n">$UID</span><span class="p">,</span><span class="n">gid</span><span class="o">=</span><span class="n">$GID</span><span class="p">,</span><span class="n">dmask</span><span class="p">,</span><span class="n">errors</span><span class="p">,</span><span class="n">fmask</span><span class="p">,</span><span class="n">iocharset</span><span class="p">,</span><span class="n">namecase</span><span class="p">,</span><span class="n">umask</span>
+ 
+ <span class="cp"># ntfs3, ntfs-3g and the legacy ntfs kernel driver options</span>
+-<span class="n">ntfs_defaults</span><span class="o">=</span><span class="n">uid</span><span class="o">=</span><span class="n">$UID</span><span class="p">,</span><span class="n">gid</span><span class="o">=</span><span class="n">$GID</span><span class="p">,</span><span class="n">windows_names</span>
+-<span class="n">ntfs_allow</span><span class="o">=</span><span class="n">uid</span><span class="o">=</span><span class="n">$UID</span><span class="p">,</span><span class="n">gid</span><span class="o">=</span><span class="n">$GID</span><span class="p">,</span><span class="n">umask</span><span class="p">,</span><span class="n">dmask</span><span class="p">,</span><span class="n">fmask</span><span class="p">,</span><span class="n">locale</span><span class="p">,</span><span class="n">norecover</span><span class="p">,</span><span class="n">ignore_case</span><span class="p">,</span><span class="n">windows_names</span><span class="p">,</span><span class="n">compression</span><span class="p">,</span><span class="n">nocompression</span><span class="p">,</span><span class="n">big_writes</span><span class="p">,</span><span class="n">nls</span><span class="p">,</span><span class="n">nohidden</span><span class="p">,</span><span class="n">sys_immutable</span><span class="p">,</span><span class="n">sparse</span><span class="p">,</span><span class="n">showmeta</span><span class="p">,</span><span class="n">prealloc</span>
++<span class="n">ntfs_defaults</span><span class="o">=</span><span class="n">uid</span><span class="o">=</span><span class="n">$UID</span><span class="p">,</span><span class="n">gid</span><span class="o">=</span><span class="n">$GID</span>
++<span class="n">ntfs_allow</span><span class="o">=</span><span class="n">uid</span><span class="o">=</span><span class="n">$UID</span><span class="p">,</span><span class="n">gid</span><span class="o">=</span><span class="n">$GID</span><span class="p">,</span><span class="n">umask</span><span class="p">,</span><span class="n">dmask</span><span class="p">,</span><span class="n">fmask</span><span class="p">,</span><span class="n">locale</span><span class="p">,</span><span class="n">norecover</span><span class="p">,</span><span class="n">ignore_case</span><span class="p">,</span><span class="n">compression</span><span class="p">,</span><span class="n">nocompression</span><span class="p">,</span><span class="n">big_writes</span><span class="p">,</span><span class="n">nls</span><span class="p">,</span><span class="n">nohidden</span><span class="p">,</span><span class="n">sys_immutable</span><span class="p">,</span><span class="n">sparse</span><span class="p">,</span><span class="n">showmeta</span><span class="p">,</span><span class="n">prealloc</span>
+ 
+ <span class="n">iso9660_defaults</span><span class="o">=</span><span class="n">uid</span><span class="o">=</span><span class="n">$UID</span><span class="p">,</span><span class="n">gid</span><span class="o">=</span><span class="n">$GID</span><span class="p">,</span><span class="n">iocharset</span><span class="o">=</span><span class="n">utf8</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="mo">0400</span><span class="p">,</span><span class="n">dmode</span><span class="o">=</span><span class="mo">0500</span>
+ <span class="n">iso9660_allow</span><span class="o">=</span><span class="n">uid</span><span class="o">=</span><span class="n">$UID</span><span class="p">,</span><span class="n">gid</span><span class="o">=</span><span class="n">$GID</span><span class="p">,</span><span class="n">norock</span><span class="p">,</span><span class="n">nojoliet</span><span class="p">,</span><span class="n">iocharset</span><span class="p">,</span><span class="n">mode</span><span class="p">,</span><span class="n">dmode</span>
+@@ -439,4 +439,4 @@ vfat_allow=uid=1001,uid=1005,gid=$GID,fl
+ <div class="footer">
+ <hr>Generated by GTK-Doc V1.33.1</div>
+ </body>
+-</html>
+\ No newline at end of file
++</html>
+diff -up udisks-2.9.4/udisks/mount_options.conf.in.omv~ udisks-2.9.4/udisks/mount_options.conf.in
+--- udisks-2.9.4/udisks/mount_options.conf.in.omv~	2022-07-13 17:38:30.606119162 +0200
++++ udisks-2.9.4/udisks/mount_options.conf.in	2022-07-13 17:38:41.100174954 +0200
+@@ -12,8 +12,8 @@
+ ### Specific filesystem type options
+ # vfat_defaults=uid=$UID,gid=$GID,shortname=mixed,utf8=1,showexec,flush
+ # vfat_allow=uid=$UID,gid=$GID,flush,utf8,shortname,umask,dmask,fmask,codepage,iocharset,usefree,showexec
+-# ntfs_defaults=uid=$UID,gid=$GID,windows_names
+-# ntfs_allow=uid=$UID,gid=$GID,umask,dmask,fmask,locale,norecover,ignore_case,windows_names,compression,nocompression,big_writes
++# ntfs_defaults=uid=$UID,gid=$GID
++# ntfs_allow=uid=$UID,gid=$GID,umask,dmask,fmask,locale,norecover,ignore_case,compression,nocompression,big_writes
+ 
+ ### Matching single block device by its UUID
+ # [/dev/disk/by-uuid/18afd8f0-0d86-4d96-8de0-5f92d2ee9800]
