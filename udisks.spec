@@ -11,10 +11,6 @@ License:	GPLv2+
 Group:		System/Libraries
 Url:		http://www.freedesktop.org/wiki/Software/udisks
 Source0:	https://github.com/storaged-project/udisks/releases/download/%{name}-%{version}/udisks-%{version}.tar.bz2
-# At this time (kernel 5.18.11), NTFS3 doesn't support the "windows_names"
-# mount option from old ntfs-3g fuse.
-# Don't try to mount ntfs partitions with it.
-Patch0:		udisks-2.9.4-ntfs3.patch
 BuildRequires:	pkgconfig(gio-unix-2.0) >= 2.31.13
 BuildRequires:	pkgconfig(gmodule-2.0)
 BuildRequires:	pkgconfig(glib-2.0) >= 2.31.13
@@ -97,6 +93,7 @@ series.
 %{_datadir}/dbus-1/system-services/org.freedesktop.UDisks2.service
 %{_presetdir}/86-%{name}.preset
 %{_unitdir}/udisks2.service
+%{_datadir}/zsh/site-functions/_udisks2
 # Permissions for local state data are 0700 to avoid leaking information
 # about e.g. mounts to unprivileged users
 %attr(0700,root,root) %dir %{_localstatedir}/lib/udisks2
