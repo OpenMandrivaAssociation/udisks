@@ -29,6 +29,7 @@ BuildRequires:	bd_loop-devel
 BuildRequires:	bd_swap-devel
 BuildRequires:	bd_fs-devel
 BuildRequires:	bd_crypto-devel
+BuildRequires:	bd_nvme-devel
 BuildRequires:	intltool
 BuildRequires:	gnome-common
 BuildRequires:	gettext-devel
