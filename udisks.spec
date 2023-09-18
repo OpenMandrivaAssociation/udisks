@@ -5,7 +5,7 @@
 
 Summary:	Disk Manager
 Name:		udisks
-Version:	2.10.0
+Version:	2.10.1
 Release:	1
 License:	GPLv2+
 Group:		System/Libraries
@@ -42,6 +42,7 @@ Requires:	libblockdev-loop
 Requires:	libblockdev-swap
 Requires:	libblockdev-fs
 Requires:	libblockdev-crypto
+Requires:	libblockdev-nvme
 # for LUKS devices
 Requires:	cryptsetup-luks
 # needed to pull in the system bus daemon
