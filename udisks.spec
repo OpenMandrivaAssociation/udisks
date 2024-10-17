@@ -9,7 +9,7 @@ Version:	2.10.1
 Release:	1
 License:	GPLv2+
 Group:		System/Libraries
-Url:		http://www.freedesktop.org/wiki/Software/udisks
+Url:		https://www.freedesktop.org/wiki/Software/udisks
 Source0:	https://github.com/storaged-project/udisks/releases/download/%{name}-%{version}/udisks-%{version}.tar.bz2
 BuildRequires:	pkgconfig(gio-unix-2.0) >= 2.31.13
 BuildRequires:	pkgconfig(gmodule-2.0)
