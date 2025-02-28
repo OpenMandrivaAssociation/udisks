@@ -5,7 +5,7 @@
 
 Summary:	Disk Manager
 Name:		udisks
-Version:	2.10.1
+Version:	2.10.90
 Release:	1
 License:	GPLv2+
 Group:		System/Libraries
@@ -16,6 +16,8 @@ BuildRequires:	pkgconfig(gmodule-2.0)
 BuildRequires:	pkgconfig(glib-2.0) >= 2.31.13
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
 BuildRequires:	pkgconfig(gudev-1.0) >= 186
+BuildRequires:	pkgconfig(udev)
+BuildRequires:	pkgconfig(blkid)
 BuildRequires:	pkgconfig(libatasmart) >= 0.19
 BuildRequires:	pkgconfig(polkit-gobject-1) >= 0.92
 BuildRequires:	pkgconfig(polkit-agent-1) >= 0.92
@@ -23,18 +25,26 @@ BuildRequires:	pkgconfig(libsystemd) >= 230
 BuildRequires:	systemd-rpm-macros
 BuildRequires:	pkgconfig(libacl)
 BuildRequires:	pkgconfig(blockdev)
+BuildRequires:	pkgconfig(mount)
+BuildRequires:	pkgconfig(libsystemd)
+BuildRequires:	pkgconfig(libconfig)
+BuildRequires:	pkgconfig(libstoragemgmt)
+BuildRequires:	iscsi-initiator-utils-devel
 BuildRequires:	bd_mdraid-devel
 BuildRequires:	bd_part-devel
 BuildRequires:	bd_loop-devel
+BuildRequires:	bd_lvm-devel
 BuildRequires:	bd_swap-devel
 BuildRequires:	bd_fs-devel
+BuildRequires:	bd_btrfs-devel
 BuildRequires:	bd_crypto-devel
 BuildRequires:	bd_nvme-devel
+BuildRequires:	%mklibname -d smart
 BuildRequires:	intltool
-BuildRequires:	gnome-common
 BuildRequires:	gettext-devel
 BuildRequires:	gtk-doc >= 1.3
 BuildRequires:	chrpath
+BuildRequires:	xsltproc
 # pull libblockdev plugins
 Requires:	libblockdev-mdraid
 Requires:	libblockdev-part
@@ -96,9 +106,34 @@ series.
 %{_presetdir}/86-%{name}.preset
 %{_unitdir}/udisks2.service
 %{_datadir}/zsh/site-functions/_udisks2
+%dir %{_sysconfdir}/udisks2
+%dir %{_sysconfdir}/udisks2/modules.conf.d
+%dir %{_libdir}/udisks2
+%dir %{_libdir}/udisks2/modules
 # Permissions for local state data are 0700 to avoid leaking information
 # about e.g. mounts to unprivileged users
 %attr(0700,root,root) %dir %{_localstatedir}/lib/udisks2
+
+#----------------------------------------------------------------------------
+%(for i in btrfs iscsi lsm lvm2; do
+	cat <<EOF
+%package $i
+Summary: $i support for udisks
+Group: System/Libraries
+
+%description $i
+$i support for udisks
+
+%files $i
+%{_libdir}/udisks2/modules/libudisks2_$i.so
+%{_datadir}/polkit-1/actions/org.freedesktop.UDisks2.$i.policy
+EOF
+	if [ "$i" = "lsm" ]; then
+		cat <<EOF
+%{_sysconfdir}/udisks2/modules.conf.d/udisks2_lsm.conf
+EOF
+	fi
+done)
 
 #----------------------------------------------------------------------------
 
@@ -154,6 +189,10 @@ daemon. This package is for the udisks 2.x series.
 %dir %{_datadir}/gtk-doc/html/udisks2
 %{_datadir}/gtk-doc/html/udisks2/*
 %{_libdir}/pkgconfig/udisks2.pc
+%{_libdir}/pkgconfig/udisks2-btrfs.pc
+%{_libdir}/pkgconfig/udisks2-iscsi.pc
+%{_libdir}/pkgconfig/udisks2-lsm.pc
+%{_libdir}/pkgconfig/udisks2-lvm2.pc
 
 #----------------------------------------------------------------------------
 
@@ -163,10 +202,15 @@ daemon. This package is for the udisks 2.x series.
 %build
 %global optlags %{opflags} -Qunused-arguments
 
-NOCONFIGURE=yes gnome-autogen.sh
+#NOCONFIGURE=yes gnome-autogen.sh
 %configure \
 	--enable-fhs-media \
 	--enable-gtk-doc \
+	--enable-btrfs \
+	--enable-iscsi \
+	--enable-lsm \
+	--enable-lvm2 \
+	--enable-modules \
 	--disable-static \
 	--with-udevdir="$(dirname %{_udevrulesdir})" \
 	--with-systemdsystemunitdir="%{_unitdir}" \
