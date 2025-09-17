@@ -5,8 +5,8 @@
 
 Summary:	Disk Manager
 Name:		udisks
-Version:	2.10.90
-Release:	3
+Version:	2.10.91
+Release:	1
 License:	GPLv2+
 Group:		System/Libraries
 Url:		https://www.freedesktop.org/wiki/Software/udisks
@@ -88,6 +88,9 @@ Conflicts:	kernel < 2.6.26
 udisks provides a daemon, D-Bus API and command line tools for
 managing disks and storage devices. This package is for the udisks 2.x
 series.
+
+%patchlist
+udisks-ntfs-defaults.patch
 
 %files -f %{name}.lang
 %{_datadir}/dbus-1/system.d/org.freedesktop.UDisks2.conf
